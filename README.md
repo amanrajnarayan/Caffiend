@@ -47,7 +47,7 @@ Graph Screen
 
 ---
 
-##🔮 Future Enhancements
+## 🔮 Future Enhancements
 🛡 Limit warning notifications.
 
 📊 Advanced analytics (hourly intake patterns).
