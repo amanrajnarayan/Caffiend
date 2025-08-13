@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/headerText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Caffeine Intake Graph"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="50dp"/>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="80dp"/>
+
+    <TextView
+        android:id="@+id/currentAmountText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Current Amount: 0 mg"
+        android:textColor="#1EB980"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/bedtimeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bedtime: 10:00 PM"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:layout_marginBottom="2dp"/>
+
+    <TextView
+        android:id="@+id/intendedLimitText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Intended Limit: 400 mg"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/entriesButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back to Entries"
+        android:backgroundTint="#37474F"
+        android:textColor="#FFFFFF"
+        />
+</LinearLayout>
