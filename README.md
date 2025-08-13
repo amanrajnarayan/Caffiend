@@ -45,4 +45,13 @@ Home Screen
 Graph Screen
 <img width="1440" height="3120" alt="image" src="https://github.com/user-attachments/assets/41b23c7a-0653-4123-b574-7157bfe23f95" />
 
+---
 
+##🔮 Future Enhancements
+🛡 Limit warning notifications.
+
+📊 Advanced analytics (hourly intake patterns).
+
+☁ Cloud backup & sync.
+
+📤 Export history as CSV.
