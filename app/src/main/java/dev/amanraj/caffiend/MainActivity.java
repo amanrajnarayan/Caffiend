@@ -23,7 +23,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     EditText amountInput;
-    Button timeInput, entryButton, sideButton;
+    Button timeInput, entryButton, sideButton, fyiButton;
     int hour, minute;
 
     static List<String[]> dataList = new ArrayList<>();
@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         entryButton = findViewById(R.id.entryButton);
         sideButton = findViewById(R.id.sideButton);
+        fyiButton = findViewById(R.id.FYI);
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -93,6 +94,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             TimePickerDialog timePickerDialog = new TimePickerDialog(this, style, onTimeSetListener, hour, minute, true);
             timePickerDialog.setTitle("Select Time");
             timePickerDialog.show();
+        } else if (view.getId()==R.id.FYI) {
+            Intent fyi_intent = new Intent(getApplicationContext(), MainActivity3.class);
+            startActivity((fyi_intent));
         }
     }
 
@@ -157,4 +161,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.putString(DATE_KEY, today);
         editor.apply();
     }
+
+
 }

@@ -56,6 +56,19 @@
         android:layout_weight="1"
         android:paddingBottom="8dp" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/FYI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#37474f"
+            android:text="FYI"
+            android:textColor="#FFFFFF"
+            android:layout_marginRight="10dp"/>
     <Button
         android:id="@+id/sideButton"
         android:layout_width="match_parent"
@@ -64,4 +77,6 @@
         android:backgroundTint="#37474F"
         android:text="View Graph"
         android:textColor="#FFFFFF" />
+
+    </LinearLayout>
 </LinearLayout>
