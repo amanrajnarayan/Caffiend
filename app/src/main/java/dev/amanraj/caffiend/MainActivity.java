@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         entryButton.setOnClickListener(this);
         sideButton.setOnClickListener(this);
         timeInput.setOnClickListener(this);
+        fyiButton.setOnClickListener(this);
 
         loadSavedData();
     }
@@ -83,7 +84,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (view.getId() == R.id.sideButton) {
             Intent i = new Intent(getApplicationContext(), MainActivity2.class);
             startActivity(i);
-        } else if (view.getId() == R.id.timeInput) {
+        } else if (view.getId()==R.id.FYI) {
+            Intent fyi_intent = new Intent(getApplicationContext(), MainActivity3.class);
+            startActivity((fyi_intent));
+        }
+        else if (view.getId() == R.id.timeInput) {
             TimePickerDialog.OnTimeSetListener onTimeSetListener = (timePicker, selectedHour, selectedMinute) -> {
                 hour = selectedHour;
                 minute = selectedMinute;
@@ -94,9 +99,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             TimePickerDialog timePickerDialog = new TimePickerDialog(this, style, onTimeSetListener, hour, minute, true);
             timePickerDialog.setTitle("Select Time");
             timePickerDialog.show();
-        } else if (view.getId()==R.id.FYI) {
-            Intent fyi_intent = new Intent(getApplicationContext(), MainActivity3.class);
-            startActivity((fyi_intent));
         }
     }
 
