@@ -14,10 +14,12 @@ import java.util.List;
 public class CaffeineAdapter extends RecyclerView.Adapter<CaffeineAdapter.ViewHolder> {
     private List<String[]> dataList;
     private Context context;
+    private Runnable onDataChanged; // callback for saveData()
 
-    public CaffeineAdapter(List<String[]> dataList, Context context) {
+    public CaffeineAdapter(List<String[]> dataList, Context context, Runnable onDataChanged) {
         this.dataList = dataList;
         this.context = context;
+        this.onDataChanged = onDataChanged;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -34,7 +36,8 @@ public class CaffeineAdapter extends RecyclerView.Adapter<CaffeineAdapter.ViewHo
 
     @Override
     public CaffeineAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_row, parent, false);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.recycler_row, parent, false);
         return new ViewHolder(view);
     }
 
@@ -45,9 +48,17 @@ public class CaffeineAdapter extends RecyclerView.Adapter<CaffeineAdapter.ViewHo
         holder.timeText.setText("Time: " + entry[1]);
 
         holder.deleteButton.setOnClickListener(v -> {
-            dataList.remove(holder.getAdapterPosition());
-            notifyItemRemoved(holder.getAdapterPosition());
-            notifyItemRangeChanged(holder.getAdapterPosition(), dataList.size());
+            int pos = holder.getAdapterPosition();
+            if (pos != RecyclerView.NO_POSITION) {
+                dataList.remove(pos);
+                notifyItemRemoved(pos);
+                notifyItemRangeChanged(pos, dataList.size());
+
+                // Trigger saveData() in MainActivity
+                if (onDataChanged != null) {
+                    onDataChanged.run();
+                }
+            }
         });
     }
 
@@ -56,3 +67,4 @@ public class CaffeineAdapter extends RecyclerView.Adapter<CaffeineAdapter.ViewHo
         return dataList.size();
     }
 }
+

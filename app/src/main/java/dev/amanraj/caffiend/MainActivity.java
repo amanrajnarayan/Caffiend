@@ -52,8 +52,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new CaffeineAdapter(dataList, this);
+//        adapter = new CaffeineAdapter(dataList, this);
+//        recyclerView.setAdapter(adapter);
+        adapter = new CaffeineAdapter(dataList, this, this::saveData);
         recyclerView.setAdapter(adapter);
+
 
         entryButton.setOnClickListener(this);
         sideButton.setOnClickListener(this);
