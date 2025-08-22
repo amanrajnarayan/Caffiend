@@ -6,10 +6,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="50dp">
 
+        <!-- About Caffeine -->
         <TextView
             android:id="@+id/aboutCaffeine"
             android:layout_width="match_parent"
@@ -26,6 +27,7 @@
             android:textColor="@color/white"
             android:text="Caffeine is a natural stimulant found in coffee, tea, and some soft drinks. It helps improve focus, alertness, and energy, but too much can affect sleep and cause restlessness." />
 
+        <!-- Daily Limits -->
         <TextView
             android:id="@+id/limitsTitle"
             android:layout_width="match_parent"
@@ -43,6 +45,7 @@
             android:textColor="@color/white"
             android:text="• Adults (18+): up to 400 mg/day\n• Teenagers (13–17 yrs): max 100 mg/day\n• Children (below 12 yrs): not recommended\n• Pregnant or breastfeeding women: ≤200 mg/day" />
 
+        <!-- Tea vs Coffee -->
         <TextView
             android:id="@+id/comparisonTitle"
             android:layout_width="match_parent"
@@ -59,6 +62,26 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:text="• Coffee: 95–120 mg caffeine\n• Tea: 30–50 mg caffeine\n\nCoffee has about 2–3 times more caffeine than tea." />
+
+        <!-- Coffee Types -->
+        <TextView
+            android:id="@+id/coffeeListTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n☕ Caffeine in Common Coffee Drinks (240ml)"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingTop="12dp"
+            android:paddingBottom="6dp"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="• Brewed Coffee (Drip/Filter): 95–120 mg\n• Espresso (30ml shot): ~63 mg (240ml Americano ≈ 126 mg)\n• Americano (2 shots + water): 120–150 mg\n• Cappuccino: 120–150 mg\n• Latte: 120–150 mg\n• Flat White: 130–150 mg\n• Mocha: 120–140 mg\n• Cold Brew: 150–200 mg\n• Nitro Cold Brew: 180–200 mg\n• Macchiato: 80–100 mg\n• Cortado: 80–100 mg\n• Instant Coffee: 60–80 mg\n• Decaf Coffee: 2–5 mg" />
+
+        <!-- Home Button -->
         <Button
             android:id="@+id/home"
             android:layout_width="match_parent"
@@ -66,10 +89,7 @@
             android:text="Home"
             android:backgroundTint="#37474F"
             android:textColor="#FFFFFF"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
             android:layout_marginVertical="40dp"
-            android:layout_marginHorizontal="20dp"
-            />
+            android:layout_marginHorizontal="20dp"/>
     </LinearLayout>
 </ScrollView>
