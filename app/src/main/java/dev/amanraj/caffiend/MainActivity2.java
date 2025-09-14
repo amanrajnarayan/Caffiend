@@ -5,6 +5,7 @@ import static dev.amanraj.caffiend.MainActivity.dataList;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -28,7 +29,6 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
     LineChart lineChart;
     Button entriesButton;
-    TextView currentAmountText, bedtimeText, intendedLimitText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,15 +39,6 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         entriesButton.setOnClickListener(this);
 
         lineChart = findViewById(R.id.lineChart);
-        currentAmountText = findViewById(R.id.currentAmountText);
-        bedtimeText = findViewById(R.id.bedtimeText);
-        intendedLimitText = findViewById(R.id.intendedLimitText);
-
-        setupChart();
-        updateTextValues();
-    }
-
-    private void setupChart() {
         lineChart.setDragEnabled(true);
         lineChart.setScaleEnabled(true);
         lineChart.setMaxVisibleValueCount(10);
@@ -56,8 +47,8 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
         for (String[] i : dataList) {
             try {
-                float time = Float.parseFloat(i[1].replace(":", "."));
-                float amount = Float.parseFloat(i[0].replaceAll("[^\\d.]", ""));
+                float time = Float.parseFloat(i[1].replace(":", ""));
+                float amount = Float.parseFloat(i[0].replaceAll("[^0-9]", ""));
                 entries.add(new Entry(time, amount));
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 e.printStackTrace();
@@ -69,8 +60,9 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         dataSet.setCircleColor(Color.MAGENTA);
         dataSet.setLineWidth(2f);
         dataSet.setCircleRadius(4f);
-        dataSet.setValueTextColor(Color.WHITE);
+        dataSet.setValueTextColor(Color.DKGRAY);
         dataSet.setValueTextSize(10f);
+        dataSet.setFillAlpha(110);
 
         LineData lineData = new LineData(dataSet);
         lineChart.setData(lineData);
@@ -78,25 +70,24 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setTextSize(12f);
-        xAxis.setTextColor(Color.CYAN);
+        xAxis.setTextSize(10f);
+        xAxis.setTextColor(Color.RED);
         xAxis.setDrawAxisLine(true);
-        xAxis.setDrawGridLines(false);
+        xAxis.setDrawGridLines(true);
         xAxis.setGranularity(1f);
-        xAxis.setLabelRotationAngle(-45f);
 
         YAxis yAxis = lineChart.getAxisLeft();
-        yAxis.setTextSize(12f);
-        yAxis.setTextColor(Color.CYAN);
+        yAxis.setTextSize(10f);
+        yAxis.setTextColor(Color.RED);
         yAxis.setDrawAxisLine(true);
-        yAxis.setDrawGridLines(false);
+        yAxis.setDrawGridLines(true);
         yAxis.setGranularity(1f);
         lineChart.getAxisRight().setEnabled(false);
 
         xAxis.setValueFormatter(new ValueFormatter() {
             @Override
             public String getAxisLabel(float value, AxisBase axis) {
-                return String.format(Locale.getDefault(), "%.1f", value).replace('.', ':');
+                return String.format(Locale.getDefault(), "%.0f", value);
             }
         });
 
@@ -106,19 +97,31 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                 return String.format(Locale.getDefault(), "%.0f mg", value);
             }
         });
-    }
 
-    private void updateTextValues() {
+        TextView currentAmountText = findViewById(R.id.currentAmountText);
+        TextView bedtimeText = findViewById(R.id.bedtimeText);
+        TextView intendedLimitText = findViewById(R.id.intendedLimitText);
+
         float currentAmount = 0;
         for (String[] i : dataList) {
             try {
-                currentAmount += Float.parseFloat(i[0].replaceAll("[^\\d.]", ""));
+                currentAmount += Float.parseFloat(i[0].replaceAll("[^0-9]", ""));
             } catch (Exception ignored) {}
         }
-        currentAmountText.setText("Current Amount: " + currentAmount + " mg");
 
-        bedtimeText.setText("Bedtime: 10:00 PM");  // Replace with dynamic setting if needed
-        intendedLimitText.setText("Intended Limit: 400 mg");
+        SharedPreferences prefs = getSharedPreferences("CaffeinePrefs", MODE_PRIVATE);
+        int limit = Integer.parseInt(prefs.getString("UserLimit", "400"));
+        String bedtime = prefs.getString("UserBedtime", "10:00 PM");
+
+        currentAmountText.setText("Current Amount: " + currentAmount + " mg");
+        bedtimeText.setText("Bedtime: " + bedtime);
+        intendedLimitText.setText("Intended Limit: " + limit + " mg");
+
+        if (currentAmount > limit) {
+            currentAmountText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+        } else {
+            currentAmountText.setTextColor(getResources().getColor(android.R.color.holo_green_light));
+        }
     }
 
     @Override

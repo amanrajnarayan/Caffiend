@@ -5,8 +5,9 @@
     android:layout_height="match_parent"
     android:background="#121212"
     android:orientation="vertical"
-    android:padding="16dp"> <!-- dark background -->
+    android:padding="16dp">
 
+    <!-- Title -->
     <TextView
         android:id="@+id/titleText"
         android:layout_width="match_parent"
@@ -19,6 +20,7 @@
         android:textSize="28sp"
         android:textStyle="bold" />
 
+    <!-- Amount Input -->
     <EditText
         android:id="@+id/amountInput"
         android:layout_width="match_parent"
@@ -26,11 +28,12 @@
         android:layout_marginBottom="12dp"
         android:background="@drawable/edit_text_bg"
         android:hint="Enter Caffeine Amount (e.g. 95 mg)"
-        android:inputType="text"
+        android:inputType="number"
         android:padding="12dp"
         android:textColor="#FFFFFF"
         android:textColorHint="#AAAAAA" />
 
+    <!-- Time Input -->
     <Button
         android:id="@+id/timeInput"
         android:layout_width="match_parent"
@@ -40,6 +43,7 @@
         android:text="Select Time"
         android:textColor="#FFFFFF" />
 
+    <!-- Add Entry -->
     <Button
         android:id="@+id/entryButton"
         android:layout_width="match_parent"
@@ -49,6 +53,7 @@
         android:text="Add Entry"
         android:textColor="#FFFFFF" />
 
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
@@ -56,27 +61,40 @@
         android:layout_weight="1"
         android:paddingBottom="8dp" />
 
+    <!-- Bottom Navigation -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
+
         <Button
             android:id="@+id/FYI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginRight="10dp"
             android:backgroundTint="#37474f"
             android:text="FYI"
-            android:textColor="#FFFFFF"
-            android:layout_marginRight="10dp"/>
-    <Button
-        android:id="@+id/sideButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="#37474F"
-        android:text="View Graph"
-        android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF" />
 
+        <Button
+            android:id="@+id/sideButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="#37474F"
+            android:text="View Graph"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/settingsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#FF9800"
+            android:text="Settings"
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 </LinearLayout>

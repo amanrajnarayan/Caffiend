@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="⚙️ Settings"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set Daily Caffeine Limit (mg)"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="6dp"/>
+
+    <EditText
+        android:id="@+id/limitInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="e.g. 400"
+        android:background="@drawable/edit_text_bg"
+        android:inputType="number"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#AAAAAA"
+        android:padding="10dp"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set Bedtime"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="6dp"/>
+
+    <Button
+        android:id="@+id/bedtimeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Bedtime"
+        android:backgroundTint="#FF8C00"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="24dp"/>
+
+    <Button
+        android:id="@+id/saveSettingsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:backgroundTint="#1EB980"
+        android:textColor="#FFFFFF"/>
+
+    <Button
+        android:id="@+id/cancelSettingsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#37474F"
+        android:textColor="#FFFFFF"/>
+
+</LinearLayout>

@@ -23,7 +23,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     EditText amountInput;
-    Button timeInput, entryButton, sideButton, fyiButton;
+    Button timeInput, entryButton, sideButton, fyiButton, settingsButton;
     int hour, minute;
 
     static List<String[]> dataList = new ArrayList<>();
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         amountInput = findViewById(R.id.amountInput);
-        amountInput.setHint("ex: 23 mg");
+        amountInput.setHint("ex: 95 mg");
 
         timeInput = findViewById(R.id.timeInput);
         timeInput.setHint("ex: 2:00 PM");
@@ -48,20 +48,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         entryButton = findViewById(R.id.entryButton);
         sideButton = findViewById(R.id.sideButton);
         fyiButton = findViewById(R.id.FYI);
+        settingsButton = findViewById(R.id.settingsButton);
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-//        adapter = new CaffeineAdapter(dataList, this);
-//        recyclerView.setAdapter(adapter);
-        adapter = new CaffeineAdapter(dataList, this, this::saveData);
+        adapter = new CaffeineAdapter(dataList, this,this::saveData);
         recyclerView.setAdapter(adapter);
-
 
         entryButton.setOnClickListener(this);
         sideButton.setOnClickListener(this);
-        timeInput.setOnClickListener(this);
         fyiButton.setOnClickListener(this);
+        settingsButton.setOnClickListener(this);
+        timeInput.setOnClickListener(this);
 
         loadSavedData();
     }
@@ -84,14 +83,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             amountInput.setText("");
             timeInput.setText("");
+
         } else if (view.getId() == R.id.sideButton) {
             Intent i = new Intent(getApplicationContext(), MainActivity2.class);
             startActivity(i);
-        } else if (view.getId()==R.id.FYI) {
+
+        } else if (view.getId() == R.id.FYI) {
             Intent fyi_intent = new Intent(getApplicationContext(), MainActivity3.class);
-            startActivity((fyi_intent));
-        }
-        else if (view.getId() == R.id.timeInput) {
+            startActivity(fyi_intent);
+
+        } else if (view.getId() == R.id.settingsButton) {
+            Intent settingsIntent = new Intent(getApplicationContext(), SettingsActivity.class);
+            startActivity(settingsIntent);
+
+        } else if (view.getId() == R.id.timeInput) {
             TimePickerDialog.OnTimeSetListener onTimeSetListener = (timePicker, selectedHour, selectedMinute) -> {
                 hour = selectedHour;
                 minute = selectedMinute;
@@ -166,6 +171,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.putString(DATE_KEY, today);
         editor.apply();
     }
-
-
 }
