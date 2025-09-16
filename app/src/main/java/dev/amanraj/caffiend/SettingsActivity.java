@@ -1,6 +1,9 @@
 package dev.amanraj.caffiend;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
@@ -12,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -71,6 +75,17 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             editor.putString("UserLimit", newLimit);
             editor.putString("UserBedtime", bedtimeText);
             editor.apply();
+
+            // Schedule bedtime reminder daily
+            PeriodicWorkRequest bedtimeReminder =
+                    new PeriodicWorkRequest.Builder(NotificationWorker.class, 24, TimeUnit.HOURS)
+                            .build();
+
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+                    "bedtime_reminder",
+                    ExistingPeriodicWorkPolicy.REPLACE,
+                    bedtimeReminder
+            );
 
             Toast.makeText(this, "Settings saved", Toast.LENGTH_SHORT).show();
             finish(); // return to previous screen

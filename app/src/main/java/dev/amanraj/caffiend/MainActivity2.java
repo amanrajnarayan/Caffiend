@@ -45,12 +45,18 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
         List<Entry> entries = new ArrayList<>();
 
+        // ✅ Build entries for chart
         for (String[] i : dataList) {
             try {
-                float time = Float.parseFloat(i[1].replace(":", ""));
+                // Parse time in HH:mm → minutes of day
+                String[] parts = i[1].split(":");
+                int hour = Integer.parseInt(parts[0]);
+                int minute = Integer.parseInt(parts[1]);
+                float timeInMinutes = hour * 60 + minute;
+
                 float amount = Float.parseFloat(i[0].replaceAll("[^0-9]", ""));
-                entries.add(new Entry(time, amount));
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                entries.add(new Entry(timeInMinutes, amount));
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -68,28 +74,32 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         lineChart.setData(lineData);
         lineChart.invalidate();
 
+        // ✅ X Axis (Time in hours)
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setTextSize(10f);
         xAxis.setTextColor(Color.RED);
         xAxis.setDrawAxisLine(true);
         xAxis.setDrawGridLines(true);
-        xAxis.setGranularity(1f);
+        xAxis.setGranularity(60f); // 1 hr intervals
 
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getAxisLabel(float value, AxisBase axis) {
+                int hours = (int) (value / 60);
+                int minutes = (int) (value % 60);
+                return String.format(Locale.getDefault(), "%02d:%02d", hours, minutes);
+            }
+        });
+
+        // ✅ Y Axis (mg values)
         YAxis yAxis = lineChart.getAxisLeft();
         yAxis.setTextSize(10f);
         yAxis.setTextColor(Color.RED);
         yAxis.setDrawAxisLine(true);
         yAxis.setDrawGridLines(true);
-        yAxis.setGranularity(1f);
+        yAxis.setGranularity(50f);
         lineChart.getAxisRight().setEnabled(false);
-
-        xAxis.setValueFormatter(new ValueFormatter() {
-            @Override
-            public String getAxisLabel(float value, AxisBase axis) {
-                return String.format(Locale.getDefault(), "%.0f", value);
-            }
-        });
 
         yAxis.setValueFormatter(new ValueFormatter() {
             @Override
@@ -98,6 +108,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
             }
         });
 
+        // ✅ Stats below chart
         TextView currentAmountText = findViewById(R.id.currentAmountText);
         TextView bedtimeText = findViewById(R.id.bedtimeText);
         TextView intendedLimitText = findViewById(R.id.intendedLimitText);
@@ -117,8 +128,11 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         bedtimeText.setText("Bedtime: " + bedtime);
         intendedLimitText.setText("Intended Limit: " + limit + " mg");
 
+        // ✅ Color warning
         if (currentAmount > limit) {
             currentAmountText.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+        } else if (currentAmount > (0.8 * limit)) {
+            currentAmountText.setTextColor(getResources().getColor(android.R.color.holo_orange_light));
         } else {
             currentAmountText.setTextColor(getResources().getColor(android.R.color.holo_green_light));
         }
