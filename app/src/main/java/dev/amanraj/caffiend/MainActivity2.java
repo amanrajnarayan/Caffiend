@@ -66,7 +66,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         dataSet.setCircleColor(Color.MAGENTA);
         dataSet.setLineWidth(2f);
         dataSet.setCircleRadius(4f);
-        dataSet.setValueTextColor(Color.DKGRAY);
+        dataSet.setValueTextColor(Color.WHITE);
         dataSet.setValueTextSize(10f);
         dataSet.setFillAlpha(110);
 

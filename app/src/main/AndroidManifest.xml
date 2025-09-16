@@ -41,13 +41,17 @@
             </intent-filter>
         </activity>
 
-        <!-- Worker for notifications -->
+        <!-- Worker for random/over-limit notifications -->
         <service
             android:name=".NotificationWorker"
             android:enabled="true"
             android:exported="false"
             tools:ignore="Instantiatable" />
 
+        <!-- Receiver for bedtime notifications -->
+        <receiver
+            android:name=".BedtimeReceiver"
+            android:enabled="true"
+            android:exported="true" />
     </application>
-
 </manifest>
